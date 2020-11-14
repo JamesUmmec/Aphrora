@@ -1,13 +1,17 @@
-use std::net::{TcpListener, SocketAddr, IpAddr, Ipv4Addr};
+use std::net::{TcpListener, SocketAddr, IpAddr, Ipv4Addr, TcpStream};
 use std::process::Command;
 use std::borrow::Borrow;
 use std::error::Error;
 
 pub mod http;
 use http::{ Request, Response };
+use std::io::{Read, Write};
 
-pub fn run_server<F>(views_handler: F)
-    where F: Fn(Request) -> Response, F: Send + Copy + 'static {
+const DEFAULT_BUFFER_SIZE: usize = 4096;
+
+pub fn run_server<F>(views_handler: F) where
+    F: Fn(Request) -> Response,
+    F: Send + Copy + 'static {
 
     // port 0 means allocate port automatically by the system.
     let localhost = SocketAddr::new(
@@ -24,9 +28,32 @@ pub fn run_server<F>(views_handler: F)
         // if connection established failed, just pass.
         // because browser will request again.
         match stream { Err(_) => (), Ok(stream) => {
-            //
+            match handle_connection(stream, views_handler) {
+                Ok(_) => (), Err(_) => (),
+            };
         }, };
     }
+}
+
+fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
+    -> Result<(), Box<dyn Error>> where
+    F: Fn(Request) -> Response,
+    F: Send + Copy + 'static {
+
+    // read into buffer as bytes array.
+    let mut buffer = [0u8; DEFAULT_BUFFER_SIZE];
+    stream.read(& mut buffer)?;
+
+    // read buffer into String and the parse into Request object.
+    let request = String::from_utf8(buffer.to_vec())?;
+    let request_object = Request::from(request);
+
+    let response =  views_handler(request_object).to_string();
+
+    stream.write(response.as_bytes())?;
+    stream.flush()?;
+
+    Ok(())
 }
 
 /// Try open the root view of the `listener` in web browser.<br>
