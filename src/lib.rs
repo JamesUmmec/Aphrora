@@ -1,3 +1,3 @@
-mod http;
+pub mod http;
 
 pub fn run_server() {}
