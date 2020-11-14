@@ -1,10 +1,10 @@
 use std::net::{TcpListener, SocketAddr, IpAddr, Ipv4Addr};
 use std::process::Command;
+use std::borrow::Borrow;
 use std::error::Error;
 
 pub mod http;
 use http::{ Request, Response };
-use std::borrow::Borrow;
 
 pub fn run_server<F>(views_handler: F)
     where F: Fn(Request) -> Response, F: Send + Copy + 'static {
@@ -20,10 +20,10 @@ pub fn run_server<F>(views_handler: F)
     try_open_in_browser(listener.borrow());
 
     // deal with each request
-    for _stream in listener.incoming() {
+    for stream in listener.incoming() {
         // if connection established failed, just pass.
         // because browser will request again.
-        match _steram { Err(_) => (), Ok(stream) => {
+        match stream { Err(_) => (), Ok(stream) => {
             //
         }, };
     }
