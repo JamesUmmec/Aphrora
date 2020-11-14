@@ -18,6 +18,15 @@ pub fn run_server<F>(views_handler: F)
 
     // open in default browser.
     try_open_in_browser(listener.borrow());
+
+    // deal with each request
+    for _stream in listener.incoming() {
+        // if connection established failed, just pass.
+        // because browser will request again.
+        match _steram { Err(_) => (), Ok(stream) => {
+            //
+        }, };
+    }
 }
 
 /// Try open the root view of the `listener` in web browser.<br>
@@ -52,13 +61,13 @@ fn try_open_in_browser(listener_borrow: &TcpListener) {
     ///     ( The development of support for other operation
     ///     systems are not finished yet. )
     /// *   In `linux`, as there might be no browser or no default browser,
-    ///     it will try `firefox` first, rather than `chrome`,
-    ///     because `firefox` is also developed by `mozilla`.
+    ///     it will try `firefox` first, because `firefox`
+    ///     is also developed by `mozilla`.
     /// *   仅 `windows` `macos` 和 `linux` 系统是受到支持的，
     ///     并且仅 `windows` 是受到稳定支持的，其他系统还没有适配好。
     /// *   在 `linux` 系统中，可能没有浏览器或没有默认浏览器。
-    ///     这个程序首先会尝试火狐浏览器，而不是谷歌浏览器，
-    ///     因为火狐和 Rust 编程语言都是 Mozilla 开发的。(2333)
+    ///     这个程序首先会尝试火狐浏览器，因为火狐浏览器
+    ///     和 Rust 编程语言都是 Mozilla 开发的。(2333)
     fn try_call_system_command(address: &str)
         -> Result<(), Box<dyn Error>> {
 
