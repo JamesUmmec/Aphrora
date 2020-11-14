@@ -1,3 +1,5 @@
+![Aphrora 0.1](./static/aphrora-image.png)
+
 # Aphrora
 
 Aphrora is a  simple server frame developed with Rust Programming Language.
