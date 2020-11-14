@@ -50,7 +50,7 @@ fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
 
     // read buffer into String and the parse into Request object.
     let request = String::from_utf8(buffer.to_vec())?;
-    let request_object = Request::from(request);
+    let request_object = Request::from(request.as_str());
 
     let response =  views_handler(request_object).to_string();
 
