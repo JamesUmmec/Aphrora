@@ -9,6 +9,26 @@ use std::io::{Read, Write};
 
 const DEFAULT_BUFFER_SIZE: usize = 4096;
 
+/// Run server with a closure of how to deal with the requests.<br><br>
+///
+/// # Example
+/// Coding a closure in the `run_server()` function like this,
+/// and when visit any view within this port,
+/// it will display a word `hello` on that page.
+/// ```
+/// use aphrora::http::{Request, Response, RequestMethod, ResponseStatus};
+/// use aphrora::run_server;
+///
+/// fn main() {
+///     run_server(|request| {
+///         println!("view of request: {}", request.view);
+///         Response{
+///             status: ResponseStatus::OK,
+///             message: String::from("hello"),
+///         }
+///     });
+/// }
+/// ```
 pub fn run_server<F>(views_handler: F) where
     F: Fn(Request) -> Response,
     F: Send + Copy + 'static {
