@@ -9,8 +9,6 @@ use std::io::{Read, Write};
 
 const DEFAULT_BUFFER_SIZE: usize = 4096;
 
-/// Run server with closure function as parameter to handle connection.<br><br>
-/// unfinished...
 pub fn run_server<F>(views_handler: F) where
     F: Fn(Request) -> Response,
     F: Send + Copy + 'static {
@@ -37,8 +35,6 @@ pub fn run_server<F>(views_handler: F) where
     }
 }
 
-/// Handle connection of each request.<br><br>
-/// unfinished...
 fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
     -> Result<(), Box<dyn Error>> where
     F: Fn(Request) -> Response,
@@ -60,15 +56,6 @@ fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
     Ok(())
 }
 
-/// Try open the root view of the `listener` in web browser.<br>
-/// 尝试在浏览器中打开这个`listener`所对应的地址。<br><br>
-///
-/// If it cannot be opened in the browser automatically,
-/// the address will be log out to let user to open it
-/// in the browser manually.<br>
-/// 如果无法自动在浏览器中打开，
-/// 将会在控制台输出对应的网址，
-/// 用户可以手动在浏览器中打开这个网址。<br><br>
 fn try_open_in_browser(listener_borrow: &TcpListener) {
     // use listener_borrow.local_addr() rather than 127.0.0.1:0 here.
     let address_url = listener_borrow.local_addr()
@@ -83,22 +70,6 @@ fn try_open_in_browser(listener_borrow: &TcpListener) {
         )
     }
 
-    /// Try call system to open an address in browser.<br>
-    /// 尝试调用系统在浏览器中打开网址。<br><br>
-    ///
-    /// # Details 细格
-    /// *   Now only `windows` `macos` `linux` are supported.
-    ///     And only `windows` is fully supported.
-    ///     ( The development of support for other operation
-    ///     systems are not finished yet. )
-    /// *   In `linux`, as there might be no browser or no default browser,
-    ///     it will try `firefox` first, because `firefox`
-    ///     is also developed by `mozilla`.
-    /// *   仅 `windows` `macos` 和 `linux` 系统是受到支持的，
-    ///     并且仅 `windows` 是受到稳定支持的，其他系统还没有适配好。
-    /// *   在 `linux` 系统中，可能没有浏览器或没有默认浏览器。
-    ///     这个程序首先会尝试火狐浏览器，因为火狐浏览器
-    ///     和 Rust 编程语言都是 Mozilla 开发的。(2333)
     fn try_call_system_command(address: &str)
         -> Result<(), Box<dyn Error>> {
 
