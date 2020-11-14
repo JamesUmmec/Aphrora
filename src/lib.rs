@@ -9,6 +9,8 @@ use std::io::{Read, Write};
 
 const DEFAULT_BUFFER_SIZE: usize = 4096;
 
+/// Run server with closure function as parameter to handle connection.<br><br>
+/// unfinished...
 pub fn run_server<F>(views_handler: F) where
     F: Fn(Request) -> Response,
     F: Send + Copy + 'static {
@@ -35,6 +37,8 @@ pub fn run_server<F>(views_handler: F) where
     }
 }
 
+/// Handle connection of each request.<br><br>
+/// unfinished...
 fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
     -> Result<(), Box<dyn Error>> where
     F: Fn(Request) -> Response,
