@@ -79,19 +79,21 @@ fn try_open_in_browser(listener_borrow: &TcpListener) {
         -> Result<(), Box<dyn Error>> {
 
         match std::env::consts::OS {
-            // try using "cmd" in Windows Operation System
-            "windows" => Command::new("powershell")
-                .arg("powershell").arg(address).output()?,
+            // try using powershell in Windows Operation System
+            "windows" => { Command::new("powershell")
+                .arg("start").arg(address).output()?; },
 
             // try using terminal in Mac Operation System
-            "macos" => Command::new("terminal")
-                .arg("open").arg(address).output()?,
+            // here might be bugs
+            "macos" => { Command::new("terminal")
+                .arg("open").arg(address).output()?; },
 
-            // not Windows and not MacOS,
-            // so it is most likely to be Linux.
-            // If not Linux, it is not supported yet.
-            _ => Command::new("terminal")
-                .arg("firefox").arg(address).output()?,
+            // try using curl in Linux Operation System
+            // here might be bugs
+            "linux" => { Command::new("terminal")
+                .arg("curl").arg(address).output()?; },
+
+            _ => { println!("Unsupported Operation System..."); },
         }; Ok(())
     }
 }
