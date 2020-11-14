@@ -1,8 +1,13 @@
 [package]
 name = "aphrora"
 version = "0.1.0"
+description = "A simple server frame developed in Rust, it can also be used to build up GUI via webpages for rust applications."
+keywords = ["simple", "server", "frame", "beginner"]
+
 authors = ["JamesUmmec <DreamingBoat@outlook.com>"]
 edition = "2018"
+license = "MIT"
+license-file = "LICENSE.txt"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
