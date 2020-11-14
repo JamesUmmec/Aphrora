@@ -13,7 +13,7 @@ pub enum RequestMethod {
 impl Request {
     pub fn from(request_string: String) -> Request {
         // unfinished
-        println!(request_string); // delete this line
+        println!("{}", request_string); // delete this line
 
         Request::default_unsupported()
     }
