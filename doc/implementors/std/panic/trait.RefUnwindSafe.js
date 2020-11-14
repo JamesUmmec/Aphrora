@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["lib"] = [{"text":"impl RefUnwindSafe for Request","synthetic":true,"types":[]},{"text":"impl RefUnwindSafe for Response","synthetic":true,"types":[]},{"text":"impl RefUnwindSafe for RequestMethod","synthetic":true,"types":[]},{"text":"impl RefUnwindSafe for ResponseStatus","synthetic":true,"types":[]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

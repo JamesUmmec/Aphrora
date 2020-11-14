@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["RequestMethod",""],["ResponseStatus",""]],"struct":[["Request",""],["Response",""]]});

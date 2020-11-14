@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["lib"] = [{"text":"impl Sync for Request","synthetic":true,"types":[]},{"text":"impl Sync for Response","synthetic":true,"types":[]},{"text":"impl Sync for RequestMethod","synthetic":true,"types":[]},{"text":"impl Sync for ResponseStatus","synthetic":true,"types":[]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
