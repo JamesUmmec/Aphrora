@@ -10,6 +10,7 @@ license-file = "LICENSE.txt"
 
 homepage = "https://github.com/JamesUmmec/Aphrora"
 repository = "https://github.com/JamesUmmec/Aphrora"
+documentation = "https://jamesummec.github.io/Aphrora/doc/lib/fn.run_server.html"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
