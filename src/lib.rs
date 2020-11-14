@@ -60,13 +60,14 @@ fn try_open_in_browser(listener_borrow: &TcpListener) {
     // use listener_borrow.local_addr() rather than 127.0.0.1:0 here.
     let address_url = listener_borrow.local_addr()
         .expect("Cannot get server address.").to_string();
-    let address_url = address_url.as_str();
+    let address_string = format!("http://{}", address_url);
+    let address_str = address_string.as_str();
 
-    match try_call_system_command(address_url) {
+    match try_call_system_command(address_str) {
         Ok(()) => println!("Opened in browser successfully."),
         Err(_) => println!(
             "Cannot open in browser automatically.\n\
-            Please visit {} in your browser.", address_url
+            Please visit {} in your browser.", address_str
         )
     }
 
@@ -75,7 +76,7 @@ fn try_open_in_browser(listener_borrow: &TcpListener) {
 
         match std::env::consts::OS {
             // try using "cmd" in Windows Operation System
-            "windows" => Command::new("cmd")
+            "windows" => Command::new("powershell")
                 .arg("start").arg(address).output()?,
 
             // try using terminal in Mac Operation System
