@@ -1,6 +1,6 @@
 const NEXT_LINE: &str = "\r\n";
 const VOID_LINE: &str = "\r\n\r\n";
-const FIRST_LINE_ENDING: &str = " HTTP/1.1\r\n\r\n";
+const FIRST_LINE_ENDING: &str = " HTTP/1.1";
 
 pub struct Request {
     pub method: RequestMethod,
