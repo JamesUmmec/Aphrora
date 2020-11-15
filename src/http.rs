@@ -61,7 +61,7 @@ impl Request {
         }
     }
 
-    pub fn default_unsupported() -> Request { Request {
+    fn default_unsupported() -> Request { Request {
         method: RequestMethod::Unsupported,
         view: String::new(),
         message: String::new(),
