@@ -7,6 +7,8 @@ use std::error::Error;
 /// Parse http string into `Request`
 /// and parse `Response` object into string.
 pub mod http;
+pub mod file;
+
 use http::{ Request, Response };
 use std::io::{Read, Write};
 
