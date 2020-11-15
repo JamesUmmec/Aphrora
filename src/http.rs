@@ -8,6 +8,8 @@ pub struct Request {
     pub message: String,
 }
 
+/// Now only support `GET` and `POST`,
+/// any other request methods will be recognized as `Unsupported`.
 pub enum RequestMethod {
     GET,
     POST,
@@ -21,6 +23,20 @@ pub enum RequestMethod {
 }
 
 impl Request {
+    /// Parse `Request` object from a raw http request `&str`.<br>
+    /// If there's any thing wrong,
+    /// or meet types that are not supported yet,
+    /// it will return a default unsupported request object via
+    /// `default_unsupported()` method.<br><br>
+    ///
+    /// # Example
+    /// Parse from a raw http request string:
+    /// ```
+    /// use aphrora::http::Request;
+    ///
+    /// let raw_request_str = "GET /example/view.html HTTP/1.1\r\n\r\n";
+    /// let request_object = Request::from(raw_request_str);
+    /// ```
     pub fn from(request_str: &str) -> Request {
         // parse first line.
         let lines: Vec<&str> = request_str.split(NEXT_LINE).collect();
@@ -68,6 +84,8 @@ pub struct Response {
     pub message: String,
 }
 
+/// Now only support `200 OK`, `404 Not Found`, `403 Forbidden`
+/// and `500 Internal Server Error`.
 pub enum ResponseStatus {
     OK,
     NotFound,
