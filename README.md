@@ -1,4 +1,4 @@
-![Aphrora 0.1](./static/aphrora-image.png)
+![AphroraImage](./static/aphrora-image.png)
 
 # Aphrora
 
