@@ -6,13 +6,13 @@
 
 ## Read in other language:
 
-- Chinese(Simplified): [中文（简体）](./international/readme/Chinese(Simplified).md)
+- Chinese(Simplified): [中文（简体）](./international/readme/Chinese(Simplified).md) (unfinished...)
 
 - [add more languages](./international/add_more_languages.md)
 
-- 
-
 ---
+
+## Brief Introduciton
 
 Aphrora is a  simple server frame developed with Rust Programming Language.
 It is just a toy server which is not powerful enough to build real web server, but it is convenient to use, especially for beginners to Rust. With `aphrora` imported, you can establish a simple server with only a closure of how to handle the requests, and it will automatically show the homepage in your browser.
@@ -96,3 +96,29 @@ pub enum ResponseStatus {
 As `unfinished` and `under development`, this crate is not available for full HTTP support yet. But it is available for many common utils with only those structures.
 
 So have fun enjoy it, and this project is still under development, it will become more and more powerful gradually.
+
+---
+
+## Under-development Version: 0.2.0
+
+- support for read file automatically, including access and forbidden options, which will make it more convenient for getting images, css and js files.
+
+- try better support for rust doc.
+
+- try building up tutorial system.
+
+## Release Note
+
+#### version 0.1.1
+
+- add basic comments to make developer more convenient.
+
+- init international support frame.
+
+- start Chinese(Simplified) translation.
+
+#### version 0.1.0
+
+- build up basic structure.
+
+- init basic structure and available to use.
