@@ -3,6 +3,9 @@ use std::process::Command;
 use std::borrow::Borrow;
 use std::error::Error;
 
+/// Basic support for `HTTP`:<br>
+/// Parse http string into `Request`
+/// and parse `Response` object into string.
 pub mod http;
 use http::{ Request, Response };
 use std::io::{Read, Write};
@@ -29,6 +32,19 @@ const DEFAULT_BUFFER_SIZE: usize = 4096;
 ///     });
 /// }
 /// ```
+/// Here in that example, as the code, when you visit any view,
+/// it will return a `hello` into your browser,
+/// you can see a line of `hello` in which webpage in your browser.
+/// You can also replace the `hello` with
+/// a string read from a `example.html` file,
+/// and then it will return show the file
+/// in the browser webpage.
+///
+/// There must be various functions in a server,
+/// so you are supposed to use something like
+/// `match` expression to deal with that.
+/// You can match the `view` property of the `Request`
+/// and then call some function to deal with it.
 pub fn run_server<F>(views_handler: F) where
     F: Fn(Request) -> Response,
     F: Send + Copy + 'static {
@@ -55,6 +71,9 @@ pub fn run_server<F>(views_handler: F) where
     }
 }
 
+/// Handle connection in a spawned thread,
+/// it takes only the `stream` and will return
+/// before the function end.
 fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
     -> Result<(), Box<dyn Error>> where
     F: Fn(Request) -> Response,
@@ -76,6 +95,20 @@ fn handle_connection<F>(mut stream: TcpStream, views_handler: F)
     Ok(())
 }
 
+/// Try open the address which the server binds to.
+/// It will try to call the system to open the browser
+/// via system command.
+///
+/// For example, in `windows`, it will call `PowerShell`
+/// to run `start http://127.0.0.1:your-port`
+/// ("your-port" here is the port code number).
+///
+/// Now only `windows`, `macos` and `linux` are supported,
+/// and those codes had been tested only on `windows`,
+/// so there might be something wrong when using `linux` and `macos`.
+/// But don't worry, it will log out the address in the console.
+/// If it didn't open in browser successfully,
+/// you can open it manually.
 fn try_open_in_browser(listener_borrow: &TcpListener) {
     // use listener_borrow.local_addr() rather than 127.0.0.1:0 here.
     let address_url = listener_borrow.local_addr()
