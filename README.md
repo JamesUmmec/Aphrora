@@ -2,6 +2,18 @@
 
 # Aphrora
 
+> README.md for version 0.1.1
+
+## Read in other language:
+
+- Chinese(Simplified): [中文（简体）](./international/readme/Chinese(Simplified).md)
+
+- [add more languages](./international/add_more_languages.md)
+
+- 
+
+---
+
 Aphrora is a  simple server frame developed with Rust Programming Language.
 It is just a toy server which is not powerful enough to build real web server, but it is convenient to use, especially for beginners to Rust. With `aphrora` imported, you can establish a simple server with only a closure of how to handle the requests, and it will automatically show the homepage in your browser.
 
