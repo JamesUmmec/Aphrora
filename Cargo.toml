@@ -10,7 +10,6 @@ license-file = "LICENSE.txt"
 
 homepage = "https://github.com/JamesUmmec/Aphrora"
 repository = "https://github.com/JamesUmmec/Aphrora"
-documentation = "https://jamesummec.github.io/Aphrora/doc/lib/fn.run_server.html"
 
 exclude = ["static", "doc"]
 
