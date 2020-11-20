@@ -77,6 +77,10 @@ impl Request {
             }
         }
     }
+
+    /// Return the view as `str`,
+    /// which makes it more convenient when `match` view.
+    pub fn view_str(&self) -> &str { self.view.as_str() }
 }
 
 pub struct Response {
@@ -105,4 +109,14 @@ impl Response {
     pub fn to_string(&self) -> String { format!(
         "{}{}", self.status.to_first_line(), self.message
     ) }
+
+    /// Generate ok directly with either `String` or `&str`,
+    /// which makes it more convenient when just return
+    /// an `OK` status `Response` object
+    pub fn default_ok<T: AsRef<String>>(content: T) -> Response {
+        Response {
+            status: ResponseStatus::OK,
+            message: content.as_ref().into()
+        }
+    }
 }
