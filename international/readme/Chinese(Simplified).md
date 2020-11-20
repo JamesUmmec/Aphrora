@@ -1,3 +1,7 @@
 ![AphroraImage](./../../static/aphrora-image.png)
 
-(翻译未完成)
+# Aphrora 简易服务器架构
+
+Aphrora 是一个用 `Rust` 语言开发的简易服务器架构，
+
+(翻译尚未完成)
