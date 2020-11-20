@@ -2,11 +2,11 @@
 
 # Aphrora
 
-> README.md for version 0.1.1
+> README.md for version 0.2.0
 
 ## Read in other language:
 
-- Chinese(Simplified): [中文（简体）](./international/readme/Chinese(Simplified).md) (unfinished...)
+- Chinese(Simplified): [中文（简体）](./international/readme/Chinese(Simplified).md) (翻译尚未完成 unfinished...)
 
 - [add more languages](./international/add_more_languages.md)
 
@@ -19,7 +19,13 @@ It is just a toy server which is not powerful enough to build real web server, b
 
 Aphrora is not only a solution to build up a simple browser, you can also use it to create a GUI for your Rust application with webpages and http communication.
 
+---
+
 ## How to use
+
+Following are examples about how to use this frame.
+
+### Hello World
 
 First you need to add `aphrora` to your `Cargo.toml` dependencies:
 
@@ -56,6 +62,53 @@ When launching the server, you only need to call the `run_server()` function wit
 Here in that example, as the code, when you visit any view, it will return a `hello` into your browser, as you can see a line of `hello` in which webpage in your browser. You can also replace the `hello` with a string read from a `example.html` file, and then it will return show the file in the browser webpage.
 
 There must be various functions in a server, so you are supposed to use something like `match` expression to deal with that. You can match the `view` property of the `Request` and then call some function to deal with it.
+
+### Enable files
+
+Since version 0.2.0, this frame provides `file.rs` module, which makes it more convenient to approach files. By calling `aphrora::file::try_under_root()`, you can try reading from files under a certain root path.
+
+```rust
+use aphrora::{
+    http::Response,
+    run_server,
+    file::try_under_root,
+};
+
+const ROOT_PATH: &str = "d:/you/can/also/use/relative/path";
+
+fn main() {
+    run_server(|request| {
+        match request.view_str() {
+            // means might be sth error here.
+            "" => Response::void_404(),
+
+            "/" => {
+                match try_under_root(ROOT_PATH, "/index.html") {
+                    Option::None => Response::void_404(),
+                    Option::Some(file_string) => Response::ok(
+                        file_string
+                    ),
+                }
+            },
+
+            _ => {
+                match try_under_root(ROOT_PATH, request.view_str()) {
+                    Option::None => Response::void_404(),
+                    Option::Some(file_string) => Response::ok(
+                        file_string
+                    ),
+                }
+            }
+        }
+    });
+}
+```
+
+These code will enable you to visit local pages (files) in browser. 
+
+`/` is where the homepage or index-page locate, and this `file::try_under_root()` function is usually called in `_` branch of the `match` expression.
+
+---
 
 ## About Structures
 
@@ -99,15 +152,35 @@ So have fun enjoy it, and this project is still under development, it will becom
 
 ---
 
-## Under-development Version: 0.2.0
+## Setting up Goals (versions incoming)
 
-- support for read file automatically, including access and forbidden options, which will make it more convenient for getting images, css and js files.
+#### version 0.2.1
 
-- try better support for rust doc.
+- better support for file access and forbidden.
 
-- try building up tutorial system.
+- better documentation (`rustdoc`).
+
+- add more commonly used methods in `http.rs`.
+
+#### version 0.3.x
+
+- configuration system: `config.rs`
+  
+  - config default port and prefer port
+  
+  - config homepage (index page) path
+
+---
 
 ## Release Note
+
+#### version 0.2.0
+
+- support for getting file.
+
+- improve `http.rs` with several commonly used methods.
+
+- add more docs (however, still not enough)
 
 #### version 0.1.1
 
