@@ -1,6 +1,6 @@
 [package]
 name = "aphrora"
-version = "0.1.1"
+version = "0.2.0"
 description = "A simple server frame developed in Rust, it can also be used to build up GUI via webpages for rust applications."
 keywords = ["simple", "server", "frame", "beginner"]
 
