@@ -113,10 +113,10 @@ impl Response {
     /// Generate ok directly with either `String` or `&str`,
     /// which makes it more convenient when just return
     /// an `OK` status `Response` object.
-    pub fn ok<T: AsRef<String>>(content: T) -> Response {
+    pub fn ok(content: String) -> Response {
         Response {
             status: ResponseStatus::OK,
-            message: content.as_ref().into()
+            message: content,
         }
     }
 
