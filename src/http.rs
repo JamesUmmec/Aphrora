@@ -112,11 +112,18 @@ impl Response {
 
     /// Generate ok directly with either `String` or `&str`,
     /// which makes it more convenient when just return
-    /// an `OK` status `Response` object
-    pub fn default_ok<T: AsRef<String>>(content: T) -> Response {
+    /// an `OK` status `Response` object.
+    pub fn ok<T: AsRef<String>>(content: T) -> Response {
         Response {
             status: ResponseStatus::OK,
             message: content.as_ref().into()
         }
     }
+
+    /// Generate a void `404 NOT FOUND` `Response` object
+    /// with void message return, which is commonly used.
+    pub fn void_404() -> Response { Response {
+        status: ResponseStatus::NotFound,
+        message: String::new(),
+    } }
 }
