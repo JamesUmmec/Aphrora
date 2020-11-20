@@ -33,7 +33,7 @@ First you need to add `aphrora` to your `Cargo.toml` dependencies:
 # file: Cargo.toml
 # -- snip --
 [dependencies]
-aphrora = "0.1.0"
+aphrora = "0.2.0"
 ```
 
 After `cargo build`, you can use `aphrora` as a model in your application.
